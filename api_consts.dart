@@ -1,4 +1,3 @@
-
 class ApiConst {
   ApiConst._();
   static const String version = "v1";
