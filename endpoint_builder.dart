@@ -41,7 +41,7 @@ class EndpointBuilder {
   }
 
   void setPath({String? path}) {
-    this._path = path ?? ApiConst.indentifier + "/" + ApiConst.version;
+    this._path = path ?? "/" + ApiConst.indentifier + "/" + ApiConst.version;
     _updateEndpointBase();
   }
 
@@ -85,7 +85,7 @@ void main() {
   EndpointBuilder ac = new EndpointBuilder();
   ac.setSchema(schema: ApiSchema.https);
   ac.setDomain(domain: "mrbeast.org");
-  ac.setPath(path: "/api/v1");
+  ac.setPath();
   ac.setApiData(key: ApiAuthLogin());
   ac.addArg("1");
   print(ac.build());
