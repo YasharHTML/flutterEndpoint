@@ -8,7 +8,7 @@ extension ValueGetter on ApiSchema {
       case ApiSchema.https:
         return 'https';
       default:
-        return 'http';
+        return 'https';
     }
   }
 }

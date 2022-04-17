@@ -1,9 +1,15 @@
+// ignore_for_file: unused_import
+
 import 'api_consts.dart';
 import 'api_schema.dart';
-import 'api_client.dart';
-import 'base_api_class.dart';
-import 'api_economy.dart';
-import 'api_auth.dart';
+import 'api/base_api_class.dart';
+import 'api/api_economy/base_api_economy.dart';
+import 'api/api_auth/api_auth_login/api_auth_login.dart';
+import 'api/api_auth/api_auth_register/api_auth_register.dart';
+import 'api/api_client/api_client_email/api_client_email.dart';
+import 'api/api_client/api_client_phone/api_client_phone.dart';
+import 'api/api_economy/api_economy_money/api_economy_money.dart';
+import 'api/api_client/base_api_client.dart';
 
 
 class EndpointBuilder {
@@ -11,6 +17,7 @@ class EndpointBuilder {
   String _domain = "example.com";
   String _path = "/api/v1";
   String _apiKey = "";
+  String _apiInfo = "";
   List<String> _args = []; 
   late String _endpointBase;
 
@@ -18,6 +25,10 @@ class EndpointBuilder {
   String? get apiSchema => _apiSchema;
   String? get domain => _domain;
   List<String> get args => _args;
+  String? get path => _path;
+  String? get apiKey => _apiKey;
+  String? get apiInfo => _apiInfo;
+
 
   void setSchema({ApiSchema? schema}) {
     this._apiSchema = schema?.name ?? ApiSchema.https.name;
@@ -35,7 +46,7 @@ class EndpointBuilder {
   }
 
   void _updateEndpointBase() {
-    this._endpointBase = this._apiSchema + "://" + this._domain + this._path + "/" + this._apiKey;
+    this._endpointBase = this._apiSchema + "://" + this._domain + this._path + "/" + this._apiKey + "/" + this._apiInfo;
   }
 
   EndpointBuilder addArg(String arg) {
@@ -43,8 +54,9 @@ class EndpointBuilder {
     return this;
   }
 
-  void setApiKey({ApiKeySchema? key}) {
+  void setApiData({ApiKeySchema? key}) {
     this._apiKey = key?.key ?? "";
+    this._apiInfo = key?.info ?? "";
     _updateEndpointBase();
   }
 
@@ -74,13 +86,7 @@ void main() {
   ac.setSchema(schema: ApiSchema.https);
   ac.setDomain(domain: "mrbeast.org");
   ac.setPath(path: "/api/v1");
-  ac.setApiKey(key: ApiClient());
+  ac.setApiData(key: ApiClientEmail());
   ac.addArg("1");
-  print(ac.build());
-  ac.partialReset();
-  ac.addArg("2");
-  print(ac.build());
-  ac.reset();
-  ac.setApiKey(key: ApiEconomy());
   print(ac.build());
 }

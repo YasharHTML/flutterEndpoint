@@ -1,0 +1,4 @@
+enum ApiAuthSchema {
+  login, 
+  register
+}

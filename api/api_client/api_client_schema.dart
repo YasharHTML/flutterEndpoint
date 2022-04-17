@@ -1,0 +1,4 @@
+enum ApiClientSchema {
+  email,
+  phone
+}
