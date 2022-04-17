@@ -86,7 +86,7 @@ void main() {
   ac.setSchema(schema: ApiSchema.https);
   ac.setDomain(domain: "mrbeast.org");
   ac.setPath(path: "/api/v1");
-  ac.setApiData(key: ApiClientEmail());
+  ac.setApiData(key: ApiAuthLogin());
   ac.addArg("1");
   print(ac.build());
 }
